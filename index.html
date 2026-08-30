@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="CALMA-SEG: a bilingual WebMCP hackathon demo for psychoeducational exercises and human-support information." />
+    <title>CALMA-SEG — Safe Support with WebMCP</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <div class="notice-bar" role="note">
+      <span id="demo-notice">Educational demo — not a clinical or emergency service.</span>
+    </div>
+
+    <header class="hero">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <p class="eyebrow">WebMCP demo</p>
+          <h1 id="app-name">CALMA-SEG</h1>
+          <p class="tagline" id="tagline">Safe Support with WebMCP</p>
+          <p class="hero-desc" id="hero-desc"></p>
+        </div>
+        <div class="lang-switch">
+          <label for="lang-select" id="lang-label">Language</label>
+          <select id="lang-select">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+          </select>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="panel" aria-labelledby="finder-heading">
+        <h2 id="finder-heading">Find an exercise</h2>
+        <form id="finder-form" class="finder-form">
+          <div class="field">
+            <label for="category-select" id="category-label">Category</label>
+            <select id="category-select">
+              <option value="all">All</option>
+              <option value="grounding">Grounding</option>
+              <option value="breathing">Breathing</option>
+              <option value="focus">Focus</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="max-minutes" id="max-minutes-label">Maximum duration (minutes)</label>
+            <input type="number" id="max-minutes" min="1" max="10" value="10" />
+          </div>
+        </form>
+        <h3 class="sr-only" id="exercises-heading">Exercises</h3>
+        <ul id="exercise-list" class="exercise-list" aria-labelledby="exercises-heading"></ul>
+      </section>
+
+      <section class="panel" aria-labelledby="selected-heading">
+        <h2 id="selected-heading" tabindex="-1">Selected exercise</h2>
+        <div id="selected-exercise" aria-live="polite">
+          <p id="selected-empty">No exercise selected yet. Choose one above, or ask a browser agent to show one.</p>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="support-heading">
+        <h2 id="support-heading">Human support options</h2>
+        <form id="support-form" class="finder-form">
+          <div class="field">
+            <label for="urgency-select" id="urgency-label">Urgency</label>
+            <select id="urgency-select">
+              <option value="routine">Routine</option>
+              <option value="soon">Soon</option>
+              <option value="immediate">Immediate</option>
+            </select>
+          </div>
+          <button type="submit" id="support-button">Show options</button>
+        </form>
+        <div id="support-result" aria-live="polite">
+          <p id="support-empty">Choose an urgency level to see general support options.</p>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="safety-heading">
+        <h2 id="safety-heading">Safety and privacy</h2>
+        <ul id="safety-list"></ul>
+      </section>
+
+      <section class="panel" aria-labelledby="agent-heading">
+        <h2 id="agent-heading">Agent activity</h2>
+        <div id="agent-activity">
+          <p id="agent-empty">No agent tool has been invoked yet.</p>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="status-heading">
+        <h2 id="status-heading">WebMCP status</h2>
+        <div id="webmcp-status" role="status"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Hackathon prototype using synthetic educational content.</p>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
