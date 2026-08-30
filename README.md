@@ -37,10 +37,10 @@ call produces a visible change on the page — nothing happens silently.
 
 | Tool | Description | Inputs | Output | Visible effect |
 |---|---|---|---|---|
-| `list_wellbeing_exercises` | Lists exercises matching a category and maximum duration | `category` (`all`\|`grounding`\|`breathing`\|`focus`), `max_minutes` (1–10), `language` (`en`\|`es`) | Text list of exercise IDs, titles, categories, durations, descriptions | None (read-only lookup) |
+| `list_wellbeing_exercises` | Lists exercises matching a category and maximum duration | `category` (`all`\|`grounding`\|`breathing`\|`focus`), `max_minutes` (1–10), `language` (`en`\|`es`) | Text list of exercise IDs, titles, categories, durations, descriptions | Updates the visible category and duration filters, refreshes the exercise list, updates "Agent activity" |
 | `show_wellbeing_exercise` | Shows one exercise's full instructions | `exercise_id` (one of the four fixed IDs), `language` (`en`\|`es`) | Text with title, duration, numbered steps, safety note | Updates the "Selected exercise" panel, moves focus to its heading, announces via `aria-live`, updates "Agent activity" |
 | `find_human_support_options` | Shows general support options for a chosen urgency | `urgency` (`routine`\|`soon`\|`immediate`), `language` (`en`\|`es`) | Text list of general support suggestions | Updates the "Human support options" panel via `aria-live`, updates "Agent activity" |
-| `explain_safety_limits` | Explains what the demo can and cannot do | `language` (`en`\|`es`) | Text list of safety/privacy limitations | Scrolls to and highlights the "Safety and privacy" section, updates "Agent activity" |
+| `explain_safety_limits` | Explains what the demo can and cannot do | `language` (`en`\|`es`) | Text list of safety/privacy limitations | Scrolls to the "Safety and privacy" section, updates "Agent activity" |
 
 The four fixed exercise IDs are: `five_senses_grounding`, `paced_breathing`,
 `orienting_pause`, `next_small_step`.
@@ -86,7 +86,7 @@ This is a static site. `netlify.toml` already configures:
 
 ```toml
 [build]
-  command = "npm run build"
+  command = "npm install && npm run build"
   publish = "dist"
 ```
 
