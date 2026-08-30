@@ -44,6 +44,7 @@ function applyStaticText() {
   document.getElementById('safety-heading').textContent = strings.safetyHeading;
   document.getElementById('agent-heading').textContent = strings.agentHeading;
   document.getElementById('status-heading').textContent = strings.statusHeading;
+  document.querySelector('.site-footer p').textContent = strings.footer;
 
   const categoryOpts = el.categorySelect.options;
   categoryOpts[0].textContent = strings.categories.all;
@@ -275,16 +276,31 @@ function registerWebMcpTools() {
         if (!['en', 'es'].includes(language)) {
           return errorResult('Invalid language. Use "en" or "es".');
         }
-        const matches = EXERCISES.filter(
-          (ex) => (category === 'all' || ex.category === category) && ex.minutes <= max_minutes
-        );
+        state.lang = language;
+        el.langSelect.value = language;
+        el.categorySelect.value = category;
+        el.maxMinutes.value = String(max_minutes);
+        applyStaticText();
+        const matches = renderExerciseList();
         if (matches.length === 0) {
+          recordAgentActivity(
+            'list_wellbeing_exercises',
+            language === 'es'
+              ? 'Se buscaron ejercicios y no se encontraron coincidencias con esos criterios.'
+              : 'Searched for exercises and found no matches for those criteria.'
+          );
           return textResult(
             language === 'es'
               ? 'No hay ejercicios que coincidan con esos criterios.'
               : 'No exercises match those criteria.'
           );
         }
+        recordAgentActivity(
+          'list_wellbeing_exercises',
+          language === 'es'
+            ? `Se actualizó la lista de ejercicios visibles (${matches.length} resultado(s)).`
+            : `Updated the visible exercise list (${matches.length} result(s)).`
+        );
         const lines = matches.map(
           (ex) =>
             `${ex.id} — ${ex.title[language]} (${ex.category}, ~${ex.minutes} min): ${ex.description[language]}`
